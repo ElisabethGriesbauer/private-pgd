@@ -38,6 +38,7 @@ class AdvancedSlicedInference:
         self.embedding = embedding if embedding else Embedding(domain)
         self.constraint_regularizer = constraint_regularizer
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        # self.device = torch.device('mps' if torch.backends.mps.is_available() else "cpu")
         self.n_particles = hp["n_particles"] if "n_particles" in hp else 100000
         self.data_init = hp["data_init"] if "data_init" in hp else None
         self.iters = hp["iters"] if "iters" in hp else 1000
@@ -80,6 +81,13 @@ class AdvancedSlicedInference:
         self.total = None
         self.history = []
         self.history_particles = []
+        
+        # Print a message based on the selected device
+        if self.device.type == 'mps':
+            print("GPU used")
+        else:
+            print("CPU used")
+
 
     def estimate(
         self,
