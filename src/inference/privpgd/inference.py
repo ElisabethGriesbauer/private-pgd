@@ -81,12 +81,7 @@ class AdvancedSlicedInference:
         self.total = None
         self.history = []
         self.history_particles = []
-        
-        # Print a message based on the selected device
-        if self.device.type == 'mps':
-            print("GPU used")
-        else:
-            print("CPU used")
+    
 
 
     def estimate(
